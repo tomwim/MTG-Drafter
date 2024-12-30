@@ -41,7 +41,7 @@ class Matchday(models.Model):
     )
 
     def __str__(self):
-        return f"Matchday {self.id}"# ({self.match_type})"
+        return f"Matchday {self.id}"
 
 class Player(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
