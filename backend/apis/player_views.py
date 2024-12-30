@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
 from django.shortcuts import get_object_or_404
 
-from models.models import Player
+from models.player import Player
 from models.serializer import PlayerSerializer
 
 class PlayerView(APIView):

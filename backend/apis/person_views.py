@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
 from django.shortcuts import get_object_or_404
 
-from models.models import Person
+from models.person import Person
 from models.serializer import PersonSerializer
 
 class PersonView(APIView):

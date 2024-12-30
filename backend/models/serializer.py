@@ -1,6 +1,10 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from .models import *
+
+from .person import Person
+from .player import Player
+from .match import Match
+from .matchday import Matchday
 
 class PersonSerializer(ModelSerializer):
     class Meta:
