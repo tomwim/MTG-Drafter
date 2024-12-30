@@ -4,8 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
 from django.shortcuts import get_object_or_404
 
-from models.models import Matchday
-from models.serializer import MatchdaySerializer
+from models.matchday import Matchday
+from models.serializer import MatchdaySerializer, PlayerSerializer
 
 class MatchdayView(APIView):
     def get(self, request):
