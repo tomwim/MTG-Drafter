@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import *
+from .person_views import *
+from .player_views import *
+from .match_views import *
+from .matchday_views import *
 
 app_name = 'apis'
 
