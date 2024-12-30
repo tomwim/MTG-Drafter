@@ -25,3 +25,19 @@ class MatchListView(APIView):
         serializer = MatchSerializer(match, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+class MatchScoreView(APIView):
+    def put(self, request, id):
+        game_id = request.query_params.get('game_id', None)
+        winner_id = request.query_params.get('winner_id', None)
+
+        try:
+            match = get_object_or_404(Match, id=id)
+        except Match.DoesNotExist:
+            raise NotFound(detail="Match not found.")
+
+        success, error_message = match.update_score(int(game_id), int(winner_id))
+        if success:
+            return Response({"success" : "Score was updated."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"failed" : error_message}, status=status.HTTP_200_OK)
+    

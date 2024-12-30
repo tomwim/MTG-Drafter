@@ -1,7 +1,7 @@
 from django.db import models
 
-from .person import Person
-from .matchday import Matchday
+from models.person import Person
+from models.matchday import Matchday
 
 COLORS = {
     ("w", "white"),
