@@ -58,7 +58,7 @@ class Player(models.Model):
     match_day = models.ForeignKey(
         Matchday, 
         on_delete=models.CASCADE, 
-        related_name="matchday",
+        related_name="players",
         null=True,
         blank=True
     )
