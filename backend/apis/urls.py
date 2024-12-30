@@ -11,10 +11,14 @@ urlpatterns = [
     path('player', PlayerView.as_view(), name='player'),
     path('persons', PersonListView.as_view(), name='persons'),
     path('person', PersonView.as_view(), name='person'),
+
     path('matches', MatchListView.as_view(), name='matches'),
     path('match', MatchView.as_view(), name='match'),
+    path('match/<int:id>/score', MatchScoreView.as_view(), name='match-score'),
+
     path('matchdays', MatchdayListView.as_view(), name='matchdays'),
     path('matchday', MatchdayView.as_view(), name='matchday'),
-    path('matchday/players', MatchdayPlayersView.as_view(), name='matchday/players'),
-    path('matchday-create-matches', MatchdayCreateMatchesView.as_view(), name='matchday-create-matches')
+    path('matchday/<int:id>/players', MatchdayPlayersView.as_view(), name='matchday-players'),
+    path('matchday/<int:id>/matches', MatchdayMatchesView.as_view(), name='matchday-matches'),
+    path('matchday/<int:id>/create-matches', MatchdayCreateMatchesView.as_view(), name='create-matches')
 ]
