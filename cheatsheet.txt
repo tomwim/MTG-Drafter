@@ -1,5 +1,0 @@
-docker-compose up
-docker-compose down
-
-winpty docker exec -it django sh # open docker sh
-python manage.py shell # open python shell 
