@@ -4,50 +4,42 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
 from django.shortcuts import get_object_or_404
 
-from models.player import Player
-from models.serializer import PlayerSerializer
+from models.member import Member
+from models.serializer import MemberSerializer
 
-class PlayerView(APIView):
+class MemberView(APIView):
     def get(self, request, id):
         try:
-            player = get_object_or_404(Player, id=id)
-        except Player.DoesNotExist:
-            raise NotFound(detail="Player not found.")
+            member = get_object_or_404(Member, id=id)
+        except Member.DoesNotExist:
+            raise NotFound(detail="Member not found.")
         
-        serializer = PlayerSerializer(player)
+        serializer = MemberSerializer(member)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def put(self, request, id):
         try:
-            player = get_object_or_404(Player, id=id)
-        except Player.DoesNotExist:
+            member = get_object_or_404(Member, id=id)
+        except Member.DoesNotExist:
             raise NotFound(detail="Player not found.")
         
-        serializer = PlayerSerializer(player, data=request.data, partial=True)
+        serializer = MemberSerializer(member, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, id):
-        try:
-            player = get_object_or_404(Player, id=id)
-        except Player.DoesNotExist:
-            raise NotFound(detail="Player not found.")
-        player.delete()
-        return Response({"message": "Player deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-        
-class PlayerCreateView(APIView):
+class MemberCreateView(APIView):
     def post(self, request):
-        serializer = PlayerSerializer(data=request.data)
+        serializer = MemberSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-class PlayerListView(APIView):
+class MemberListView(APIView):
     def get(self, request):
-        players = Player.objects.all()
-        serializer = PlayerSerializer(players, many=True)
+        members = Member.objects.all()
+        serializer = MemberSerializer(members, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

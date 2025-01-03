@@ -21,7 +21,7 @@ class Match(models.Model):
     )
 
     def __str__(self):
-        return f"Match {self.id} (Matchday {self.match_day.id}): {self.player_one.person.display_name} {self.scores.count(1)} - {self.scores.count(2)} {self.player_two.person.display_name}"
+        return f"Match {self.id} (Matchday {self.match_day.id}): {self.player_one.member.display_name} {self.scores.count(1)} - {self.scores.count(2)} {self.player_two.member.display_name}"
     
     def update_score(self, game_id : int, winner_id : int):
         if not self.scores:

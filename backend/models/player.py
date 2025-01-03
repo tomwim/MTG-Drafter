@@ -1,6 +1,6 @@
 from django.db import models
 
-from models.person import Person
+from models.member import Member
 from models.matchday import Matchday
 
 COLORS = {
@@ -12,7 +12,12 @@ COLORS = {
 }
 
 class Player(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    member = models.ForeignKey(
+        Member, 
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE
+    )
     has_to_play = models.CharField(
         max_length=1,
         choices=COLORS,
@@ -32,7 +37,7 @@ class Player(models.Model):
     )
 
     def __str__(self):
-        return f"{self.person.first_name} {self.person.last_name} ({self.get_has_to_play_display()}, {self.get_cannot_play_display()})"
+        return f"{self.member.display_name} ({self.get_has_to_play_display()}, {self.get_cannot_play_display()})"
 
     def to_string(self):
-        return f"{self.person.display_name} has to play {self.get_has_to_play_display()} and cannot play {self.get_cannot_play_display()}."
+        return f"{self.member.display_name} has to play {self.get_has_to_play_display()} and cannot play {self.get_cannot_play_display()}."
