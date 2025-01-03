@@ -43,7 +43,6 @@ class Matchday(models.Model):
         return get_game_count(self.match_type)
     
     def generate_matches(self):
-        print ("Generate")  
         from .match import Match
         players = self.players.all()
         for i, player in enumerate(players):
@@ -51,4 +50,4 @@ class Matchday(models.Model):
             for opponent in opponents:
                 match = Match(match_day=self, player_one=player, player_two=opponent)
                 match.save()
-                print(f"Created {match.id} with {match.player_one.person.display_name} vs {match.player_two.person.display_name}")
+                print(f"Created {match.id} with {match.player_one.member.display_name} vs {match.player_two.member.display_name}")

@@ -4,3 +4,4 @@ psycopg2-binary>=2.9
 djangorestframework-simplejwt>=5.0
 python-dotenv>=0.19.2
 drf-yasg>=1.21.8
+django-cors-headers>=3.14.0

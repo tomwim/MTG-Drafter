@@ -8,9 +8,7 @@ from models.matchday import Matchday
 from models.serializer import MatchdaySerializer, PlayerSerializer, MatchSerializer
 
 class MatchdayView(APIView):
-    def get(self, request):
-        id = request.query_params.get('id', None)
-
+    def get(self, request, id):
         try:
             matchday = get_object_or_404(Matchday, id=id)
         except Matchday.DoesNotExist:
