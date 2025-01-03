@@ -13,7 +13,7 @@ urlpatterns = [
     path('players/<int:id>', PlayerView.as_view(), name='player'),
 
     path('members', MemberListView.as_view(), name='members'),
-    path('members', MemberCreateView.as_view(), name='member-create'),
+    path('member', MemberCreateView.as_view(), name='member-create'),
     path('members/<int:id>', MemberView.as_view(), name='member'),
 
     path('matches', MatchListView.as_view(), name='matches'),
