@@ -31,7 +31,7 @@ const MembersPage: React.FC = () => {
       ))
       }
       <Link to={`/members/create`}>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <button className="btn">
               Create
           </button>
       </Link>

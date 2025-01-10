@@ -3,10 +3,16 @@
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.23",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"
   },
   "dependencies": {
-    "react-router-dom": "^7.1.1"
+    "cally": "^0.7.2",
+    "date-fns": "^4.1.0",
+    "react-day-picker": "^9.5.0",
+    "react-icons": "^5.4.0",
+    "react-router-dom": "^7.1.1",
+    "react-svg": "^16.2.0"
   }
 }

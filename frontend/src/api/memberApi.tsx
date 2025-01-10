@@ -29,7 +29,6 @@ export const addMember = async (data: Partial<Member>) => {
         const response = await httpClient.post<Member>(`/member`, data);
         return response.data;
     } catch (error: any) {
-        console.error('Error creating member:', error);
         throw new Error('Failed to create member.');
     }
 }
@@ -39,7 +38,6 @@ export const editMember = async (id: number, updated_data: Partial<Member>) => {
         const response = await httpClient.put<Member>(`/members/${id}`, updated_data);
         return response.data;
     } catch (error: any) {
-        console.error('Error updating member:', error);
         throw new Error('Failed to update member.');
     }
 }

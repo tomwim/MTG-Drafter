@@ -10,7 +10,7 @@ function App() {
       <div className="flex h-screen">
         <Sidebar />
         {/* Main Content Area */}
-        <div className="ml-64 p-8 w-full">
+        <div className="p-6 flex-1">
           <AppRoutes />
         </div>
       </div>
