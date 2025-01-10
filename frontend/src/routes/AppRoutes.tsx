@@ -7,6 +7,7 @@ import MembersPage from '../pages/MembersPage';
 import EditMemberPage from '../pages/EditMemberPage';
 import MemberPage from '../pages/MemberPage';
 import CreateMemberPage from '../pages/CreateMemberPage';
+import CreateMatchdayPage from '../pages/CreateMatchdayPage';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/about" element={<About />} />
 
         <Route path="/matchdays" element={<MatchdaysPage />} />
+        <Route path="/matchdays/create" element={<CreateMatchdayPage />} />
         <Route path="/matchdays/:id" element={<MatchdayPage />} />
 
         <Route path="/members" element={<MembersPage />} />

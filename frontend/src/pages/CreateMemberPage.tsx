@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-
-import { Member, addMember } from '../api/memberApi'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { addMember } from '../api/memberApi'
 import MemberForm from '../components/MemberForm';
 
 const CreateMemberPage: React.FC = () => {

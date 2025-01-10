@@ -8,7 +8,6 @@ const MatchdaysPage: React.FC = () => {
   useEffect(() => {
     const getMatchdays = async () => {
       try {
-        console.log("GetMatchdays")
         const fetchedMatchdays = await fetchMatchdays();
         setMatchdays(fetchedMatchdays);
       } catch (err) {
@@ -31,6 +30,11 @@ const MatchdaysPage: React.FC = () => {
         </li>
       ))
       }
+      <Link to={`/matchdays/create`}>
+        <button className="btn">
+          Create
+        </button>
+      </Link>
     </div>
   );
 };
