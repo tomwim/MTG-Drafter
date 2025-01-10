@@ -32,8 +32,12 @@ class Matchday(models.Model):
             default="bo2"
     )
     set_id = models.CharField(
+        max_length=255,
         blank=True,
         null=True
+    )
+    is_included = models.BooleanField(
+        default=True
     )
 
     def __str__(self):

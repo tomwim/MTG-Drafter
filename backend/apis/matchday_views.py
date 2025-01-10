@@ -1,3 +1,4 @@
+import json
 from rest_framework.response import Response 
 from rest_framework import status
 from rest_framework.views import APIView
@@ -5,7 +6,7 @@ from rest_framework.exceptions import NotFound
 from django.shortcuts import get_object_or_404
 
 from models.matchday import Matchday
-from models.serializer import MatchdaySerializer, PlayerSerializer, MatchSerializer
+from models.serializer import MatchdaySerializer, MatchdayWithPlayersSerializer, PlayerSerializer, MatchSerializer
 
 class MatchdayView(APIView):
     def get(self, request, id):
@@ -69,3 +70,17 @@ class MatchdayCreateMatchesView(APIView):
         else:
             matchday.generate_matches()
             return Response({"success" : "Matches were created."}, status=status.HTTP_200_OK)
+        
+class MatchdayCreateView(APIView):
+    def post(self, request):
+        create_matches = request.query_params.get('create-matches', False)
+
+        matchday_serializer = MatchdayWithPlayersSerializer(data=request.data)
+        if matchday_serializer.is_valid():
+            matchday = matchday_serializer.save()
+            if create_matches:
+                matchday.generate_matches()
+            return Response(matchday_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(matchday_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
