@@ -49,7 +49,10 @@ const PlayerCreateForm: React.FC<PlayerProps> = ({ value, index, id, possibleMem
     }, [player])
 
     useEffect(() => {
-        currentPlayer.member = selectedMember?.id
+        if (currentPlayer.member && selectedMember)
+        {
+            currentPlayer.member.id = selectedMember.id
+        }
         currentPlayer.must_play = mustPlayColor.id
         currentPlayer.cannot_play = cannotPlayColor.id
         currentPlayer.plays = Array.from(selectedColors.entries())
@@ -66,7 +69,7 @@ const PlayerCreateForm: React.FC<PlayerProps> = ({ value, index, id, possibleMem
     }
 
     const handleMemberSelection = (member: Member) => {
-        if (member.id != currentPlayer.member) {
+        if (member.id != currentPlayer.member?.id) {
             setSelectedMember(member)
         }
         setIsDropdownOpen(false)

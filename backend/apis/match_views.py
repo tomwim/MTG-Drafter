@@ -27,17 +27,39 @@ class MatchListView(APIView):
     
 class MatchScoreView(APIView):
     def put(self, request, id):
-        game_id = request.query_params.get('game_id', None)
-        winner_id = request.query_params.get('winner_id', None)
+        score_player_one = request.query_params.get('score_player_one', None)
+        score_player_two = request.query_params.get('score_player_two', None)
 
         try:
             match = get_object_or_404(Match, id=id)
         except Match.DoesNotExist:
             raise NotFound(detail="Match not found.")
+        
+        if str.isdigit(score_player_one) == False:
+            return Response({
+                "success" : False,
+                "message" : "Score of player one is not a positive integer.",
+                "match_id" : match.id
+                }, status=status.HTTP_200_OK)
+        
+        if str.isdigit(score_player_two) == False:
+            return Response({
+                "success" : False,
+                "message" : "Score of player two is not a positive integer.",
+                "match_id" : match.id
+                }, status=status.HTTP_200_OK)
 
-        success, error_message = match.update_score(int(game_id), int(winner_id))
+        success, error_message = match.update_score(int(score_player_one), int(score_player_two))
         if success:
-            return Response({"success" : "Score was updated."}, status=status.HTTP_200_OK)
+            return Response({
+                "success" : True,
+                "message" : f"Score was updated: {match.score_player_one} - {match.score_player_two}",
+                "match_id" : match.id
+                }, status=status.HTTP_200_OK)
         else:
-            return Response({"failed" : error_message}, status=status.HTTP_200_OK)
+            return Response({
+                "success" : False,
+                "message" : error_message,
+                "match_id" : match.id
+                }, status=status.HTTP_200_OK)
     

@@ -167,7 +167,7 @@ const CalendarDropdown: React.FC<CalendarDropdownProps> = ({ value, onChanged })
                 }}>
                 <label tabIndex={0} role="input" className="btn input input-bordered bg-base-100 font-normal" onClick={handleClick}>
                     <FaRegCalendarAlt fill="oklch(var(--p))"/>
-                    {selectedDate.toLocaleDateString('de-DE', { dateStyle: "medium" })}
+                    {selectedDate.toLocaleDateString('de-DE', { dateStyle: "long" })}
 
                 </label>
                 <div tabIndex={0} className={`dropdown-content menu bg-base-200 rounded-lg z-[1] p-2 shadow-lh border border-base-300 ${isDropdownOpen ? "" : "hidden"}`}>
