@@ -64,13 +64,15 @@ const TableComponent: React.FC<TableProps> = ({ players, matches }) => {
 
     interface StatsRowProps {
         player: Player,
+        place: number,
         stats: PlayerStats
 
     }
-    const StatsRow : React.FC<StatsRowProps> = ({ player, stats }) => {
+    const StatsRow : React.FC<StatsRowProps> = ({ player, place, stats }) => {
 
         return (
             <tr key={player.id}>
+                <th>{place}.</th>
                 <th>{player.member.display_name}</th>
                 <th className="text-center">{stats.wins}</th>
                 <th className="text-center">{stats.draws}</th>
@@ -87,6 +89,7 @@ const TableComponent: React.FC<TableProps> = ({ players, matches }) => {
                 {/* head */}
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Name</th>
                         <th className="text-center">Won</th>
                         <th className="text-center">Drawn</th>
@@ -96,8 +99,8 @@ const TableComponent: React.FC<TableProps> = ({ players, matches }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {playerStats && playerStats.sort((s1, s2) => s2.points - s1.points).map((stats) => (
-                        <StatsRow key={stats.id} player={players.find(p => p.id == stats.id) || players[0]} stats={stats}/>
+                    {playerStats && playerStats.sort((s1, s2) => s2.points - s1.points).map((stats, index) => (
+                        <StatsRow key={stats.id} player={players.find(p => p.id == stats.id) || players[0]} place={index + 1} stats={stats}/>
                     ))}
                 </tbody>
             </table>
