@@ -1,8 +1,9 @@
 import httpClient from "./httpClient";
+import { Member } from "./memberApi";
 
 export interface Player {
     id: number,
-    member: number,
+    member: Member,
     must_play: string,
     cannot_play: string,
     plays: string[],
@@ -11,7 +12,7 @@ export interface Player {
 
 export const fetchPlayers = async (): Promise<Player[]> => {
     try {
-        const response = await httpClient.get<Player[]>('/members');
+        const response = await httpClient.get<Player[]>('/players');
         return response.data;
     } catch (error) {
         throw new Error(`Error fetching players.`);

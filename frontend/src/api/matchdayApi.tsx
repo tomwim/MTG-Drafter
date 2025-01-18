@@ -1,5 +1,7 @@
 import httpClient from "./httpClient";
 import { Player } from "./playerApi";
+import { Match } from "./matchApi";
+
 export interface Matchday {
     id: number,
     date: string,
@@ -37,4 +39,22 @@ export const createMatchdayWithPlayers = async (matchday: Partial<Matchday>, pla
     } catch (error: any) {
         throw new Error('Failed to create member.');
     }
-}
+};
+
+export const fetchMatchdayPlayers = async (matchday_id: number): Promise<Player[]> => {
+    try {
+        const response = await httpClient.get<Player[]>(`/matchdays/${matchday_id}/players`);
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error fetching players.`);
+    }
+};
+
+export const fetchMatchdayMatches = async (matchday_id: number): Promise<Match[]> => {
+    try {
+        const response = await httpClient.get<Match[]>(`/matchdays/${matchday_id}/matches`);
+        return response.data;
+    } catch (error) {
+        throw new Error(`Error fetching players.`);
+    }
+};

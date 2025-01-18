@@ -12,13 +12,9 @@ class MemberSerializer(ModelSerializer):
         fields = "__all__"
 
 class PlayerSerializer(ModelSerializer):
+    member = MemberSerializer() 
     class Meta:
         model = Player
-        fields = "__all__"
-
-class MatchSerializer(ModelSerializer):
-    class Meta:
-        model = Match
         fields = "__all__"
 
 class MatchdaySerializer(ModelSerializer):
@@ -44,3 +40,12 @@ class MatchdayWithPlayersSerializer(serializers.ModelSerializer):
             Player.objects.create(**player_data)
 
         return matchday
+
+class MatchSerializer(ModelSerializer):
+    match_type = serializers.SerializerMethodField()
+    class Meta:
+        model = Match
+        fields = "__all__"
+
+    def get_match_type(self, obj):
+        return obj.match_day.match_type if obj.match_day else None

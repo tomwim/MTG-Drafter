@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-
-
 import CalendarDropdown from "./matchday/Calendar";
 import PlayersCreateForm from "./matchday/PlayersCreateForm";
 import SetDropdown from "./matchday/SetDropdown";

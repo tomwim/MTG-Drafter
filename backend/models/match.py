@@ -12,29 +12,37 @@ class Match(models.Model):
         null=True,
         blank=True
     )
-    player_one = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_one')
-    player_two = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_two')
-    scores = ArrayField(
-        models.IntegerField(),
-        default=list,
-        blank=True
+    player_one = models.ForeignKey(
+        Player, 
+        on_delete=models.CASCADE, 
+        related_name='player_one'
+    )
+    player_two = models.ForeignKey(
+        Player, 
+        on_delete=models.CASCADE, 
+        related_name='player_two'
+    )
+    score_player_one = models.PositiveIntegerField(
+        default=0
+    )
+    score_player_two = models.PositiveIntegerField(
+        default=0
     )
 
     def __str__(self):
-        return f"Match {self.id} (Matchday {self.match_day.id}): {self.player_one.member.display_name} {self.scores.count(1)} - {self.scores.count(2)} {self.player_two.member.display_name}"
+        return f"Match {self.id} (Matchday {self.match_day.id}): {self.player_one.member.display_name} {self.score_player_one} - {self.score_player_two} {self.player_two.member.display_name}"
     
-    def update_score(self, game_id : int, winner_id : int):
-        if not self.scores:
-            self.scores = [0] * self.match_day.get_game_count()
-
-        if game_id > self.match_day.get_game_count():
-            return False, f"Match only has {self.match_day.get_game_count()} games."
-        elif winner_id != self.player_one.id and winner_id != self.player_two.id and winner_id > 0:
-            return False, f"Match winner is not part of the match."
-        else:
-            self.scores[game_id] = winner_id
-            self.save()
-            return True, ""
+    def update_score(self, score_player_one : int, score_player_two : int):
+        if score_player_one < 0 or score_player_two < 0:
+            return False, f"Score cannot be less than 0."
+        
+        if score_player_one + score_player_two > self.match_day.get_game_count():
+            return False, f"Match type is {self.match_day.match_type}. Accumulated score {score_player_one + score_player_two} is higher than {self.match_day.get_game_count()}."
+        
+        self.score_player_one = score_player_one
+        self.score_player_two = score_player_two
+        self.save()
+        return True, ""
 
     class Meta:
         verbose_name = "Match"

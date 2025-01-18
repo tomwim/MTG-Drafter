@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('matches', MatchListView.as_view(), name='matches'),
     path('match', MatchView.as_view(), name='match'),
-    path('match/<int:id>/score', MatchScoreView.as_view(), name='match-score'),
+    path('matches/<int:id>/score', MatchScoreView.as_view(), name='match-score'),
 
     path('matchdays', MatchdayListView.as_view(), name='matchdays'),
     path('matchday', MatchdayCreateView.as_view(), name='matchday-create'),
