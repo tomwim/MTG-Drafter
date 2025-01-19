@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Matchday, fetchMatchday, fetchMatchdayPlayers, fetchMatchdayMatches } from '../api/matchdayApi'
+import { fetchMatchdayPlayers, fetchMatchdayMatches } from '../api/matchdayApi'
 import { Match } from '../api/matchApi';
 import { Player } from '../api/playerApi';
 import { getColorById } from '../utils/manaUtils';
@@ -11,9 +10,6 @@ import { useMatchdayViewContext, MatchdayView } from '../context/MatchdayViewCon
 import { useMatchdayContext } from '../context/MatchdayContext';
 
 const MatchdayPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const matchdayId = parseInt(id || '', 10);
-  // const [matchday, setMatchday] = useState<Matchday>();
   const [players, setPlayers] = useState<Player[]>([])
   const [matches, setMatches] = useState<Match[]>([])
   const [set, setSet] = useState<Set | undefined>()
@@ -21,26 +17,11 @@ const MatchdayPage: React.FC = () => {
   const { activeView, setActiveView } = useMatchdayViewContext();
   const { matchday, setMatchday } = useMatchdayContext();
 
-
-
   useEffect(() => {
-    console.log("Hello []")
     updateMatchdayValues();
-
-    // const getMatchdays = async () => {
-    //   try {
-    //     const fetchedMatchdays = await fetchMatchday(matchdayId);
-    //     setMatchday(fetchedMatchdays);
-    //   } catch (err) {
-    //     console.log("Fetch matchdays failed.")
-    //   }
-    // };
-
-    // getMatchdays();
   }, []);
 
   useEffect(() => {
-    console.log("Hello [matchday]")
     updateMatchdayValues()
   }, [matchday]);
 
