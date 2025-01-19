@@ -16,7 +16,6 @@ const AppRoutes: React.FC = () => {
 
         <Route path="/matchdays" element={<MatchdaysPage />} />
         <Route path="/matchdays/create" element={<CreateMatchdayPage />} />
-        <Route path="/matchdays/:id" element={<MatchdayPage />} />
         <Route path="/matchday" element={<MatchdayPage />} />
 
         <Route path="/members" element={<MembersPage />} />

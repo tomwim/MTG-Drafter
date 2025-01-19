@@ -9,7 +9,6 @@ const CreateMatchdayPage: React.FC = () => {
     useEffect(() => {
         const getSets = async () => {
             try {
-                console.log("GetMatchdays")
                 const fetchedSets = await fetchSets();
                 setSets(fetchedSets);
             } catch (err) {

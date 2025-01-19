@@ -6,7 +6,7 @@ const BottomNavBar: React.FC = () => {
     const {activeView, setActiveView} = useMatchdayViewContext();
 
     return (
-        <div className="btm-nav">
+        <div className="btm-nav bg-base-300">
             <button className={`${activeView == MatchdayView.Table ? "active" : ""}`} onClick={() => setActiveView(MatchdayView.Table)}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
