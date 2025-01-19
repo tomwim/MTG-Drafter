@@ -1,18 +1,21 @@
-import { Link } from 'react-router-dom';
 import './App.css'
+import BottomNavBar from './components/BottomNavBar';
+import { MatchdayInfoProvider } from './context/MatchdayInfoProvider';
 import './routes/AppRoutes'
 import AppRoutes from './routes/AppRoutes';
-import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <>
       <div className="flex h-screen">
-        <Sidebar />
+
         {/* Main Content Area */}
-        <div className="p-6 flex-1">
-          <AppRoutes />
-        </div>
+        <MatchdayInfoProvider>
+          <div className="p-6 flex-1">
+            <AppRoutes />
+            <BottomNavBar />
+          </div>
+        </MatchdayInfoProvider>
       </div>
     </>
   )
