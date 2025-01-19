@@ -21,18 +21,20 @@ const MemberPage: React.FC = () => {
         };
 
         getMember();
-    }, []);
+    }, [id]);
 
     return (
         <div className="member-page">
-            <h1>{member?.display_name}</h1>
+            <h1 className="text-center text-lg font-semibold pb-6">{member?.display_name}</h1>
             <p>{member?.name} ({member?.id})</p>
-            <Link to={`/members/${member?.id}/edit`}>
+            <div className="pt-6">
                 <button className="btn">
-                    Edit
+                    <Link to={`/members/${member?.id}/edit`}>
+                        Edit
+                    </Link>
                 </button>
-            </Link>
-        </div> 
+            </div>
+        </div>
     );
 };
 

@@ -45,8 +45,11 @@ const EditMemberPage: React.FC = () => {
 
     return (
         <div className="edit-member-page">
-            <h1>{member?.display_name}</h1>
-            <p>{member?.name} ({member?.id})</p>
+            <h1 className="text-center text-lg font-semibold pb-6">Edit Member</h1>
+            <div className='mb-4'>
+                <span className='font-semibold'>Id: </span>
+                <span>{member?.id}</span>
+            </div>
             {member && <MemberForm member={member} onFormSubmit={onSubmitClicked}></MemberForm>}
         </div>
     );

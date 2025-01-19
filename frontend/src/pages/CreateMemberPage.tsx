@@ -15,7 +15,7 @@ const CreateMemberPage: React.FC = () => {
 
     return (
         <div className="create-member-page">
-            <h1>Create Member</h1>
+            <h1 className="text-center text-lg font-semibold">Create Member</h1>
             <MemberForm member={null} onFormSubmit={onSubmitClicked}></MemberForm>
         </div>
     );

@@ -71,29 +71,33 @@ const MatchdayPage: React.FC = () => {
 
   return (
     <div className="matchday-page h-full">
-      <h1>{set?.name} ({matchday && new Date(matchday.date).toLocaleDateString('de-DE', { dateStyle: "long" })})</h1>
+      {set && <div className="h-full">
 
-      {activeView == MatchdayView.Table &&
-        <div className="p-10">
-          <TableComponent matches={matches} players={players}></TableComponent>
-        </div>
-      }
+        <h1 className="text-center text-lg font-semibold pb-6">{set?.name}</h1>
 
-      {activeView == MatchdayView.Players &&
-        <div className="p-10">
-          {players.map((player) => (
-            <div key={player.id}>
-              <div>{player.member.display_name} ({getColorById(player.must_play)?.name} - {getColorById(player.cannot_play)?.name})</div>
-            </div>
-          ))}
-        </div>
-      }
+        {activeView == MatchdayView.Table &&
+          <div className="">
+            <TableComponent matches={matches} players={players}></TableComponent>
+          </div>
+        }
 
-      {activeView == MatchdayView.Matches && matches &&
-        <div className="p-10 h-full">
-          {matches.length > 0 && <MatchesList matches={matches} players={players} onSubmitted={onMatchesSubmitted}></MatchesList>}
-        </div>
-      }
+        {activeView == MatchdayView.Players &&
+          <div className="">
+            {players.map((player) => (
+              <div key={player.id}>
+                <div>{player.member.display_name} ({getColorById(player.must_play)?.name} - {getColorById(player.cannot_play)?.name})</div>
+              </div>
+            ))}
+          </div>
+        }
+
+        {activeView == MatchdayView.Matches && matches &&
+          <div className="h-full">
+            {matches.length > 0 && <MatchesList matches={matches} players={players} onSubmitted={onMatchesSubmitted}></MatchesList>}
+          </div>
+        }
+        
+      </div>}
     </div>
   );
 };
