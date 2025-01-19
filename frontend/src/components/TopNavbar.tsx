@@ -4,8 +4,11 @@ import { useMatchdayContext } from '../context/MatchdayContext';
 import { Set, fetchSet } from "../api/scryfall/setApi";
 import { Link } from "react-router-dom";
 
+interface TopNavbarProps {
+    onSideDrawerToggled: () => void;
+}
 
-const TopNavbar: React.FC = () => {
+const TopNavbar: React.FC<TopNavbarProps> = ({ onSideDrawerToggled }) => {
     const { matchday, setMatchday } = useMatchdayContext();
     const [set, setSet] = useState<Set>()
 
@@ -24,16 +27,11 @@ const TopNavbar: React.FC = () => {
         getSet();
     }, [matchday])
 
-    useEffect(() => {
-
-    }, [set])
-
-
     return (
         <div className="navbar bg-base-300">
             <div className="navbar-start">
                 <div>
-                    <button className="btn btn-circle btn-ghost">
+                    <button className="btn btn-circle btn-ghost" onClick={onSideDrawerToggled}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -48,7 +46,7 @@ const TopNavbar: React.FC = () => {
                     </button>
                 </div>
 
-                <div className="flex-1">
+                <div className="flex-1 mx-3">
                     <span className="font-bold">MTG-Drafter</span>
                 </div>
             </div>

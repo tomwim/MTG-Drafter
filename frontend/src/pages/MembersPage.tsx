@@ -20,8 +20,7 @@ const MembersPage: React.FC = () => {
 
   return (
     <div className="members-page">
-      <h1>Members</h1>
-      <p>This is your members page.</p>
+      <h1 className="text-center text-lg font-semibold pb-6">Members</h1>
       {members?.map((member) => (
         <li key={member.id}>
           <Link to={`/members/${member.id}`}>
@@ -30,11 +29,15 @@ const MembersPage: React.FC = () => {
         </li>
       ))
       }
-      <Link to={`/members/create`}>
-          <button className="btn">
-              Create
-          </button>
-      </Link>
+
+      <div className="pt-6">
+        <button className="btn">
+          <Link to={`/members/create`}>
+            Create
+          </Link>
+        </button>
+      </div>
+
     </div>
   );
 };

@@ -3,11 +3,17 @@ import { Matchday, fetchMatchdays } from '../api/matchdayApi';
 
 interface MatchdayContextType {
     matchday: Matchday | undefined;
-    setMatchday: (user: Matchday | undefined) => void;
+    setMatchday: (matchday: Matchday | undefined) => void;
+}
+
+interface MatchdaysContextType {
+    matchdays: Matchday[];
+    setMatchdays: (matchdays: Matchday[]) => void;
 }
 
 // Create the context
 const MatchdayContext = createContext<MatchdayContextType | undefined>(undefined);
+const MatchdaysContext = createContext<MatchdaysContextType | undefined>(undefined);
 
 // Context provider component
 export const MatchdayProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -28,19 +34,29 @@ export const MatchdayProvider: React.FC<{ children: ReactNode }> = ({ children }
     }, []);
 
     useEffect(() => {
-        setMatchday(matchdays[matchdays.length - 1])
+        setMatchday(matchdays[0])
     }, [matchdays]);
 
     return (
-        <MatchdayContext.Provider value={{ matchday, setMatchday }}>
-            {children}
-        </MatchdayContext.Provider>
+        <MatchdaysContext.Provider value={{ matchdays, setMatchdays }}>
+            <MatchdayContext.Provider value={{ matchday, setMatchday }}>
+                {children}
+            </MatchdayContext.Provider>
+        </MatchdaysContext.Provider>
     );
 };
 
 // Hook for easy access to the context
 export const useMatchdayContext = (): MatchdayContextType => {
     const context = useContext(MatchdayContext);
+    if (!context) {
+        throw new Error('useAppContext must be used within an AppProvider');
+    }
+    return context;
+};
+
+export const useMatchdaysContext = (): MatchdaysContextType => {
+    const context = useContext(MatchdaysContext);
     if (!context) {
         throw new Error('useAppContext must be used within an AppProvider');
     }

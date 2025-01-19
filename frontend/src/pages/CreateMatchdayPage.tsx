@@ -21,7 +21,7 @@ const CreateMatchdayPage: React.FC = () => {
 
     return (
         <div className="create-matchday-page">
-            <h1>Create new matchday</h1>
+            <h1 className="text-center text-lg font-semibold">Create Matchday</h1>
             {sets && <MatchdayCreateForm></MatchdayCreateForm>}
         </div>
     );
