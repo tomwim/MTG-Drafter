@@ -68,31 +68,40 @@ const SidebarDrawer: React.FC<SidebarDrawerProps> = ({ isOpen, children, onDrawe
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
+        <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 ">
           <li className="menu-title">MTG-Drafter</li>
+          <div className="menu">
+            
+            <li>
+              <details open>
+                <summary className="font-semibold">Matchdays</summary>
+                <ul>
+                  <li onClick={handleDrawerChanged} ><Link to={"/matchdays/create"}>+  Create matchday</Link></li>
+                  {matchdays.sort((md1, md2) => md2.id - md1.id).map((md) => (
+                    <li key={md.id} onClick={() => { handleDrawerChanged(); setMatchday(md) }}><Link to={`/matchday/`}>{sets.find(s => s.id == md.set_id)?.name}</Link></li>
+                  ))}
 
-          <li className="font-semibold">Matchdays</li>
-          {sets && <div className="ml-2">
-            {matchdays.sort((md1, md2) => md2.id - md1.id).map((md) => (
-              <li key={md.id} onClick={() => { handleDrawerChanged(); setMatchday(md) }}><Link to={`/matchday/`}>{sets.find(s => s.id == md.set_id)?.name}</Link></li>
-            ))}
-          </div>}
-          <div onClick={handleDrawerChanged} className="self-center btn bg-base-100 btn-sm"><Link to={"/matchdays/create"}>Create new</Link></div>
-          <div className="divider"></div>
+                </ul>
+              </details>
+            </li>
+            <li className="font-semibold" onClick={() => handleDrawerChanged()}><Link to={`/matchday/`}>All-Time Standings</Link></li>
 
-          <li className="font-semibold">All-Time Standings</li>
-          <div className="divider"></div>
+            <li>
+              <details>
+                <summary className="font-semibold">Members</summary>
+                <ul>
+                  <li onClick={handleDrawerChanged} ><Link to={"/members/create"}>+ Create member</Link></li>
+                  {members.map((m) => (
+                    <li key={m.id} onClick={() => handleDrawerChanged()}><Link to={`/members/${m.id}`}>{m.display_name}</Link></li>
+                  ))}
+                </ul>
+              </details>
+            </li>
 
-          <li className="font-semibold">Members</li>
-          {members && <div className="ml-2">
-            {members.map((m) => (
-              <li key={m.id} onClick={() => handleDrawerChanged()}><Link to={`/members/${m.id}`}>{m.display_name}</Link></li>
-            ))}
-          </div>}
-          <div onClick={handleDrawerChanged} className="self-center btn bg-base-100 btn-sm"><Link to={"/members/create"}>Create new</Link></div>
+          </div>
         </ul>
       </div>
-    </div >
+    </div>
   );
 };
 

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useMatchdayViewContext, MatchdayView } from "../context/MatchdayViewContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 const BottomNavbar: React.FC = () => {
     const { activeView, setActiveView } = useMatchdayViewContext();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isMatchdayPage = location.pathname === "/matchday";
 
     const updateView = (newView: MatchdayView) => {
         setActiveView(newView)
@@ -14,7 +17,7 @@ const BottomNavbar: React.FC = () => {
 
     return (
         <div className="btm-nav bg-base-300">
-            <button className={`${activeView == MatchdayView.Table ? "active" : ""}`} onClick={() => updateView(MatchdayView.Table)}>
+            <button className={`${activeView == MatchdayView.Table && isMatchdayPage ? "active" : ""}`} onClick={() => updateView(MatchdayView.Table)}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -28,7 +31,7 @@ const BottomNavbar: React.FC = () => {
                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
             </button>
-            <button className={`${activeView == MatchdayView.Matches ? "active" : ""}`} onClick={() => updateView(MatchdayView.Matches)}>
+            <button className={`${activeView == MatchdayView.Matches && isMatchdayPage ? "active" : ""}`} onClick={() => updateView(MatchdayView.Matches)}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -42,7 +45,7 @@ const BottomNavbar: React.FC = () => {
                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </button>
-            <button className={`${activeView == MatchdayView.Players ? "active" : ""}`} onClick={() => updateView(MatchdayView.Players)}>
+            <button className={`${activeView == MatchdayView.Players && isMatchdayPage ? "active" : ""}`} onClick={() => updateView(MatchdayView.Players)}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
