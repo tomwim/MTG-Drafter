@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useMatchdayViewContext, MatchdayView } from "../context/MatchdayViewContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
 
 const BottomNavbar: React.FC = () => {
     const { activeView, setActiveView } = useMatchdayViewContext();
+    const [ isMatchdayPage, setIsMatchdayPage ] = useState<boolean>(false)
     const navigate = useNavigate();
     const location = useLocation();
 
-    const isMatchdayPage = location.pathname === "/matchday";
+    useEffect(() => {
+        setIsMatchdayPage(location.pathname === "/matchday/" || location.pathname === "/matchday");
+    }, [location])
 
     const updateView = (newView: MatchdayView) => {
         setActiveView(newView)
