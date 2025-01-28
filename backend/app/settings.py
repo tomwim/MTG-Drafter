@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'models',
     "apis",
     "drf_yasg",
-    'corsheaders'
+    'corsheaders',
+    'oauth2_provider'
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,25 @@ LOGGING = {
     },
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        # 'rest_framework.authentication.SessionAuthentication',  # Optional: For admin or non-API login
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # Default to authenticated access
+    ],
+}
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {
+        'read': 'Read access to protected resources',
+        'write': 'Write access to protected resources',
+        'admin': 'Admin-level access',
+    },
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,
+    'REFRESH_TOKEN_EXPIRE_SECONDS': 86400,
+    'OIDC_ENABLED': False,  # Set token expiration (e.g., 10 hours)
+    'ALLOWED_REDIRECT_URIS': ['http://localhost:3000/callback'],  # Add your React app callback URL here
+    # 'OAUTH2_BACKEND_CLASS': 'oauth2_provider.backends.OAuthLibCore',
+}

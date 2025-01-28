@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from oauth2_provider.views import TokenView
 
 # Initialize the Swagger schema view
 schema_view = get_schema_view(
@@ -37,5 +38,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('apis.urls', namespace='apis')),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('o/token/', TokenView.as_view(), name='token'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger')
 ]
