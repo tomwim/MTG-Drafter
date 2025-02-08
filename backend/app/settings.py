@@ -56,9 +56,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware'
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React development server
-]
+CORS_ALLOW_ALL_ORIGINS = True  # This allows requests from any domain
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # React development server
+# ]
 
 ROOT_URLCONF = 'app.urls'
 
