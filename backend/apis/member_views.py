@@ -2,12 +2,21 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import AllowAny
+from oauth2_provider.contrib.rest_framework import TokenHasScope
 from django.shortcuts import get_object_or_404
 
 from models.member import Member
 from models.serializer import MemberSerializer
 
 class MemberView(APIView):
+    def get_permissions(self):
+        # Restrict POST requests to users with the 'write' scope
+        if self.request.method == 'PUT':
+            return [TokenHasScope()]  # Use OAuth-based permission
+        # Allow all users to make GET requests
+        return [AllowAny()]
+    
     def get(self, request, id):
         try:
             member = get_object_or_404(Member, id=id)
