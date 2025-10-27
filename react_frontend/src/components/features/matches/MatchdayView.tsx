@@ -48,7 +48,6 @@ export function MatchdayView({ matchdayId }: MatchdayViewProps) {
   // Calculate stats
   const totalMatches = matches.length;
   const completedMatches = matches.filter(m => m.status === 'completed').length;
-  const inProgressMatches = matches.filter(m => m.status === 'in_progress').length;
   const pendingMatches = matches.filter(m => m.status === 'pending').length;
 
   const getStatusColor = (status: typeof matchday.status) => {
@@ -85,7 +84,7 @@ export function MatchdayView({ matchdayId }: MatchdayViewProps) {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-4 gap-4 text-center">
+          <div className="grid grid-cols-3 gap-4 text-center">
             <div className="p-3 bg-gray-50 rounded-lg">
               <div className="text-2xl font-bold">{totalMatches}</div>
               <div className="text-sm text-gray-600">Total Matches</div>
@@ -93,10 +92,6 @@ export function MatchdayView({ matchdayId }: MatchdayViewProps) {
             <div className="p-3 bg-green-50 rounded-lg">
               <div className="text-2xl font-bold text-green-600">{completedMatches}</div>
               <div className="text-sm text-gray-600">Completed</div>
-            </div>
-            <div className="p-3 bg-blue-50 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600">{inProgressMatches}</div>
-              <div className="text-sm text-gray-600">In Progress</div>
             </div>
             <div className="p-3 bg-gray-50 rounded-lg">
               <div className="text-2xl font-bold">{pendingMatches}</div>
@@ -127,10 +122,6 @@ export function MatchdayView({ matchdayId }: MatchdayViewProps) {
                 <MatchRow
                   key={match.id}
                   match={match}
-                  onUpdateScore={(matchId) => {
-                    console.log('Update score for match:', matchId);
-                    // TODO: Open dialog/form to update score
-                  }}
                 />
               ))}
             </div>
