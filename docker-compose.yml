@@ -31,6 +31,23 @@ services:
     environment:
       - DATABASE_URL=postgres://myuser:postgres@db:5432/mtgdatabase
 
+  frontend:
+    container_name: react-frontend
+    build:
+      context: ./react_frontend  # adjust path to your frontend directory
+      dockerfile: ./Dockerfile
+    ports:
+      - "5173:5173"  # Vite dev server
+    volumes:
+      - ./react_frontend:/app
+      - /app/node_modules  # prevent overwriting node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000/api  # your Django backend URL
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+
   # frontend:
   #   build:
   #     context: .
